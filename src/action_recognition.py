@@ -90,45 +90,6 @@ class ActionRecognition():
         average_fps = total_fps / total_frames
         print('Average FPS: ' + str(average_fps))
 
-    def process_videos_mediapipe(self, video_path=0):
-        cap = cv2.VideoCapture(video_path)
-        with self.mp_holistic.Holistic(
-            min_detection_confidence=0.5,
-            min_tracking_confidence=0.5) as holistic:
-            while cap.isOpened():
-                success, image = cap.read()
-                if not success:
-                    print("Ignoring empty camera frame.")
-                    # If loading a video, use 'break' instead of 'continue'.
-                    continue
-
-                # To improve performance, optionally mark the image as not writeable to
-                # pass by reference.
-                image.flags.writeable = False
-                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-                results = holistic.process(image)
-
-                # Draw landmark annotation on the image.
-                image.flags.writeable = True
-                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-                self.mp_drawing.draw_landmarks(
-                    image,
-                    results.face_landmarks,
-                    self.mp_holistic.FACEMESH_CONTOURS,
-                    landmark_drawing_spec=None,
-                    connection_drawing_spec=self.mp_drawing_styles
-                    .get_default_face_mesh_contours_style())
-                self.mp_drawing.draw_landmarks(
-                    image,
-                    results.pose_landmarks,
-                    self.mp_holistic.POSE_CONNECTIONS,
-                    landmark_drawing_spec=self.mp_drawing_styles
-                    .get_default_pose_landmarks_style())
-
-                cv2.imshow('MediaPipe Holistic', cv2.flip(image, 1))
-                if cv2.waitKey(20) & 0xFF == ord('q'):
-                    break
-        cap.release()
 
 if __name__ == '__main__':
     act_recog = ActionRecognition()

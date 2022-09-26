@@ -5,11 +5,18 @@
 #    pip-compile
 #
 absl-py==1.2.0
-    # via mediapipe
+    # via
+    #   mediapipe
+    #   tensorboard
+    #   tensorflow
 albumentations==1.3.0
     # via src (setup.py)
+astunparse==1.6.3
+    # via tensorflow
 attrs==22.1.0
     # via mediapipe
+cachetools==5.2.0
+    # via google-auth
 certifi==2022.9.14
     # via requests
 charset-normalizer==2.1.1
@@ -20,8 +27,26 @@ cycler==0.11.0
     # via matplotlib
 decorator==4.4.2
     # via moviepy
+flatbuffers==2.0.7
+    # via tensorflow
 fonttools==4.37.3
     # via matplotlib
+gast==0.4.0
+    # via tensorflow
+google-auth==2.11.1
+    # via
+    #   google-auth-oauthlib
+    #   tensorboard
+google-auth-oauthlib==0.4.6
+    # via tensorboard
+google-pasta==0.2.0
+    # via tensorflow
+grpcio==1.49.1
+    # via
+    #   tensorboard
+    #   tensorflow
+h5py==3.7.0
+    # via tensorflow
 idna==3.4
     # via requests
 imageio==2.22.0
@@ -30,10 +55,22 @@ imageio==2.22.0
     #   scikit-image
 imageio-ffmpeg==0.4.7
     # via moviepy
+importlib-metadata==4.12.0
+    # via markdown
 joblib==1.2.0
     # via scikit-learn
+keras==2.10.0
+    # via tensorflow
+keras-preprocessing==1.1.2
+    # via tensorflow
 kiwisolver==1.4.4
     # via matplotlib
+libclang==14.0.6
+    # via tensorflow
+markdown==3.4.1
+    # via tensorboard
+markupsafe==2.1.1
+    # via werkzeug
 matplotlib==3.6.0
     # via mediapipe
 mediapipe==0.8.11
@@ -46,20 +83,27 @@ numpy==1.23.3
     # via
     #   albumentations
     #   contourpy
+    #   h5py
     #   imageio
+    #   keras-preprocessing
     #   matplotlib
     #   mediapipe
     #   moviepy
     #   opencv-contrib-python
     #   opencv-python
     #   opencv-python-headless
+    #   opt-einsum
     #   pandas
     #   pywavelets
     #   qudida
     #   scikit-image
     #   scikit-learn
     #   scipy
+    #   tensorboard
+    #   tensorflow
     #   tifffile
+oauthlib==3.2.1
+    # via requests-oauthlib
 opencv-contrib-python==4.6.0.66
     # via mediapipe
 opencv-python==4.6.0.66
@@ -68,10 +112,13 @@ opencv-python-headless==4.6.0.66
     # via
     #   albumentations
     #   qudida
+opt-einsum==3.3.0
+    # via tensorflow
 packaging==21.3
     # via
     #   matplotlib
     #   scikit-image
+    #   tensorflow
 pandas==1.5.0
     # via src (setup.py)
 pillow==9.2.0
@@ -81,8 +128,17 @@ pillow==9.2.0
     #   scikit-image
 proglog==0.1.10
     # via moviepy
-protobuf==3.20.2
-    # via mediapipe
+protobuf==3.19.5
+    # via
+    #   mediapipe
+    #   tensorboard
+    #   tensorflow
+pyasn1==0.4.8
+    # via
+    #   pyasn1-modules
+    #   rsa
+pyasn1-modules==0.2.8
+    # via google-auth
 pyparsing==3.0.9
     # via
     #   matplotlib
@@ -102,7 +158,14 @@ pyyaml==6.0
 qudida==0.0.4
     # via albumentations
 requests==2.28.1
-    # via moviepy
+    # via
+    #   moviepy
+    #   requests-oauthlib
+    #   tensorboard
+requests-oauthlib==1.3.1
+    # via google-auth-oauthlib
+rsa==4.9
+    # via google-auth
 scikit-image==0.19.3
     # via albumentations
 scikit-learn==1.1.2
@@ -113,7 +176,28 @@ scipy==1.9.1
     #   scikit-image
     #   scikit-learn
 six==1.16.0
-    # via python-dateutil
+    # via
+    #   astunparse
+    #   google-auth
+    #   google-pasta
+    #   grpcio
+    #   keras-preprocessing
+    #   python-dateutil
+    #   tensorflow
+tensorboard==2.10.1
+    # via tensorflow
+tensorboard-data-server==0.6.1
+    # via tensorboard
+tensorboard-plugin-wit==1.8.1
+    # via tensorboard
+tensorflow==2.10.0
+    # via src (setup.py)
+tensorflow-estimator==2.10.0
+    # via tensorflow
+tensorflow-io-gcs-filesystem==0.27.0
+    # via tensorflow
+termcolor==2.0.1
+    # via tensorflow
 threadpoolctl==3.1.0
     # via scikit-learn
 tifffile==2022.8.12
@@ -123,6 +207,21 @@ tqdm==4.64.1
     #   moviepy
     #   proglog
 typing-extensions==4.3.0
-    # via qudida
+    # via
+    #   qudida
+    #   tensorflow
 urllib3==1.26.12
     # via requests
+werkzeug==2.2.2
+    # via tensorboard
+wheel==0.37.1
+    # via
+    #   astunparse
+    #   tensorboard
+wrapt==1.14.1
+    # via tensorflow
+zipp==3.8.1
+    # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

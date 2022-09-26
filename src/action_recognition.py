@@ -124,8 +124,8 @@ class ActionRecognition():
 if __name__ == '__main__':
     act_recog = ActionRecognition()
 
-    act_recog.classify_video_pytorch(video_path='input/torch/archery.mp4', video_length=10)
-    #act_recog.classify_video_tensorflow(video_path='input/tensorflow/playingtrombone.mp4', 'playingtrombone')
+    #act_recog.classify_video_pytorch(video_path='input/torch/archery.mp4', video_length=10)
+    act_recog.classify_video_tensorflow('input/tensorflow/kickingfieldgoal.mp4', 'kickingfieldgoal')
 
 
 

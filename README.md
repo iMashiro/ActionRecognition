@@ -20,10 +20,10 @@ Then run the below code to install the src as root folder and install dependenci
 pip3 install -e .
 ```
 
-Finally, to run the code with PyTorch model, you will need to execute the command, this will install the torch in lts version with cuda if available:
+Finally, you will need to execute the command, this will install the torch in lts version::
 
 ```
-pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cu111
+pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cpu
 ```
 
 ## Results and informations

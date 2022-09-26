@@ -6,22 +6,42 @@ import cv2
 import time
 import numpy as np
 import mediapipe as mp
+import tensorflow as tf
 
 class ActionRecognition():
     def __init__(self):
         self.labels_path = 'data/labels.txt'
 
         self.utils = Utils(self.labels_path)
+        self.class_names = ['tossingsalad', 'playingkeyboard', 'jugglingballs',
+                            'kitesurfing', 'wrappingpresent', 'ridingmechanicalbull',
+                            'tappingguitar', 'eatingcake', 'drinkingshots', 'playingcontroller',
+                            'dancinggangnamstyle', 'kickingfieldgoal', 'jogging', 'krumping',
+                            'playingrecorder', 'dodgeball', 'shakinghead', 'playingtrombone',
+                            'trimmingorshavingbeard', 'surfingwater', 'skijumping', 'snatchweightlifting',
+                            'canoeingorkayaking', 'playingcards', 'fingersnapping', 'jumpstyledancing',
+                            'playingtennis', 'climbingladder', 'bakingcookies', 'gettingatattoo']
 
         #Preparing the model
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model = torchvision.models.video.r3d_18(pretrained=True, progress=True)
         self.model = self.model.eval().to(self.device)
 
+        self.model_trained = tf.keras.models.load_model('scripts/model_acc_0.20.h5')
+
         #Mediapipe configuration
         self.mp_drawing = mp.solutions.drawing_utils
         self.mp_drawing_styles = mp.solutions.drawing_styles
         self.mp_holistic = mp.solutions.holistic
+
+    def print_output(self, output, desired):
+        find_label = 0
+        for j in range(0, len(output)):
+            max_value = max(output[j])
+            max_index = np.where(output[j] == max_value)[0][0]
+            if self.class_names[max_index] == desired:
+                find_label += 1
+        print('Label desired found in ' + str(find_label) + ' of ' + str(len(output)))
 
     def get_video_dimensions(self, path):
         height, width = -1, -1
@@ -64,7 +84,7 @@ class ActionRecognition():
                         input_frames = input_frames.to(self.device)
                         outputs = self.model(input_frames)
                         _, preds = torch.max(outputs.data, 1)
-                        label = self.utils.class_names[preds].strip()
+                        label = self.utils.class_names[preds]
 
                     end_time = time.time()
                     fps = 1/(end_time-start_time)
@@ -90,12 +110,22 @@ class ActionRecognition():
         average_fps = total_fps / total_frames
         print('Average FPS: ' + str(average_fps))
 
+    def classify_video_tensorflow(self, video_path, expected_label):
+        video, height, width = self.get_video_dimensions(video_path)
+
+        frames = np.array(self.utils.extract_frames(video_path))
+        outputs = self.model_trained.predict(frames)
+        self.print_output(outputs, expected_label)
+
+        video.release()
+        cv2.destroyAllWindows()
+
 
 if __name__ == '__main__':
     act_recog = ActionRecognition()
 
-    #act_recog.classify_video_pytorch(video_path='input/archery.mp4', video_length=10)
-    act_recog.process_videos_mediapipe(video_path='input/archery.mp4')
+    act_recog.classify_video_pytorch(video_path='input/torch/archery.mp4', video_length=10)
+    #act_recog.classify_video_tensorflow(video_path='input/tensorflow/playingtrombone.mp4', 'playingtrombone')
 
 
 

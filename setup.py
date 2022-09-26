@@ -7,5 +7,11 @@ setup(
     description='It Classifies Actions',
     author='britohyago',
     license='',
-    install_requires=['albumentations', 'opencv-python', 'mediapipe', 'pandas', 'pytube', 'moviepy']
+    install_requires=['albumentations',
+                        'opencv-python',
+                        'mediapipe',
+                        'pandas',
+                        'pytube',
+                        'moviepy',
+                        'tensorflow']
 )

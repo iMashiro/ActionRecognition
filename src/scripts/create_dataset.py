@@ -7,9 +7,9 @@ class CreateDataset():
         self.labels_path = '../data/labels.txt'
         self.utils = Utils(self.labels_path)
 
-        self.raw_train_data_path = '../data/kinetics400/train.csv'
-        self.raw_test_data_path = '../data/kinetics400/test.csv'
-        self.raw_test_validate_path = '../data/kinetics400/validate.csv'
+        self.raw_train_data_path = '../data/kinetics400/train_links.csv'
+        self.raw_test_data_path = '../data/kinetics400/test_links.csv'
+        self.raw_test_validate_path = '../data/kinetics400/validate_links.csv'
         self.destiny_path = '../data/'
 
         self.class_names = self.select_classes()
